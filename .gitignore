@@ -1,0 +1,15 @@
+# Dependencias
+**/node_modules/
+**/vendor/
+
+# Entornos y Secretos
+**/.env
+**/.env.local
+**/.env.production
+
+# Compilados y Temporales
+**/.next/
+**/storage/framework/
+**/storage/logs/
+**/.DS_Store
+Thumbs.db
