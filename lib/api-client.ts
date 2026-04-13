@@ -5,14 +5,14 @@ import axios from 'axios';
  * Configura la base URL y gestiona los tokens de seguridad.
  */
 const apiClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api',
+  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8010/api',
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
   },
 
-  //Necesario si decides usar cookies con sanctum en lugar de tokens Bearer
-  withCredentials: true,
+  // Usamos Bearer token; evitar credenciales cross-site previene bloqueo CORS del navegador.
+  withCredentials: false,
 });
 
 /**
@@ -42,7 +42,7 @@ apiClient.interceptors.response.use(
       //Limpiar datos de sesión si el token expira o es inválido
       if (typeof window !== 'undefined') {
         localStorage.removeItem('auth_token');
-        window.location.href = '/login'; //Redirigir al login
+        window.location.href = '/'; //Redirigir al login real
       }
     }
     return Promise.reject(error);

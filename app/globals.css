@@ -128,3 +128,35 @@
     @apply font-sans;
   }
 }
+
+@keyframes orbit-slow {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(30px, -20px, 0) scale(1.06);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes orbit-reverse {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-26px, 22px, 0) scale(0.96);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+.animate-orbit-slow {
+  animation: orbit-slow 14s ease-in-out infinite;
+}
+
+.animate-orbit-reverse {
+  animation: orbit-reverse 16s ease-in-out infinite;
+}
