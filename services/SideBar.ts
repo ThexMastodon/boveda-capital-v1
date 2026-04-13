@@ -1,5 +1,5 @@
 import apiClient from '@/lib/api-client';
-import { NavModule } from '@/types/sidebar';
+import { NavModule } from '@/types/Sidebar';
 
 export const navigationService = {
   getModules: async (): Promise<NavModule[]> => {

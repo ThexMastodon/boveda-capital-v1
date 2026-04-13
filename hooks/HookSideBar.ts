@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { NavModule } from "@/types/sidebar";
+import { NavModule } from "@/types/Sidebar";
 import { navigationService } from "@/services/SideBar";
 
 export const useSidebar = () => {
