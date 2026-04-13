@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import * as LucideIcons from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { ChevronDown, LogOut, ShieldCheck, User, Menu, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -16,8 +17,7 @@ interface SideBarProps {
 }
 
 const DynamicIcon = ({ name, className }: { name: string; className?: string}) => {
-  const iconsMap = LucideIcons as Record<string, React.ComponentType<{ className?: string }>>;
-  const IconComponent = iconsMap[name];
+  const IconComponent = LucideIcons[name as keyof typeof LucideIcons] as LucideIcon | undefined;
   if (!IconComponent) return <LucideIcons.HelpCircle className={className} />;
   return <IconComponent className={className} />;
 };
