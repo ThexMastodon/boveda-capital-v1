@@ -21,6 +21,32 @@ class AuthService
             ->orWhere('username', $credentials['login'])
             ->first();
 
-            if (!$user || !Hash::check($credentials['password'], $user->))
+        if (!$user || !Hash::check($credentials['password'], $user->password)) {
+            throw ValidationException::withMessages([
+                'login' => ['Credenciales invalidas.'],
+            ]);
+        }
+
+        $token = $user->createToken('auth_token')->plainTextToken;
+
+        return [
+            'access_token' => $token,
+            'token_type' => 'Bearer',
+            'user' => [
+                'id' => $user->id,
+                'name' => $user->name,
+                'last_name' => $user->last_name,
+                'second_last_name' => $user->second_last_name,
+                'username' => $user->username,
+                'email' => $user->email,
+            ],
+        ];
+    }
+
+    public function logout(?User $user): void
+    {
+        if ($user) {
+            $user->currentAccessToken()?->delete();
+        }
     }
 }
