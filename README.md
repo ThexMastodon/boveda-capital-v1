@@ -18,13 +18,12 @@ Plataforma de alto rendimiento para la administración de créditos financieros.
 </div>
 
 <!-- PROJECT SHIELDS -->
-
-<div align="center">
-<img src="https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js" alt="Next.js">
-<img src="https://www.google.com/search?q=https://img.shields.io/badge/Laravel-11-FF2D20%3Fstyle%3Dfor-the-badge%26logo%3Dlaravel%26logoColor%3Dwhite" alt="Laravel">
-<img src="https://www.google.com/search?q=https://img.shields.io/badge/PostgreSQL-15%2B-316192%3Fstyle%3Dfor-the-badge%26logo%3Dpostgresql%26logoColor%3Dwhite" alt="PostgreSQL">
-<img src="https://www.google.com/search?q=https://img.shields.io/badge/TypeScript-5-007ACC%3Fstyle%3Dfor-the-badge%26logo%3Dtypescript%26logoColor%3Dwhite" alt="TypeScript">
-</div>
+<p align="center">
+<a href="https://nextjs.org"><img src="https://camo.githubusercontent.com/4bef23a1a1689acb39f94f4c6825652d0ed4cd6dcb036c45b937b450b1df2add/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4e6578742e6a732d3030303030303f7374796c653d666c6174266c6f676f3d6e657874646f746a73266c6f676f436f6c6f723d7768697465" alt="Next.js" /></a>
+<a href="https://laravel.com"><img src="https://camo.githubusercontent.com/ef1a47276589247efdac6efd0565c453aca43ffe33e335c5b197952fb565f33e/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4c61726176656c2d4646324432303f7374796c653d666c6174266c6f676f3d6c61726176656c266c6f676f436f6c6f723d7768697465" alt="Laravel" /></a>
+<a href="https://www.postgresql.org/"><img src="https://camo.githubusercontent.com/5794ccb4a02205d87eff2d4743c7e63b63f5b6ba67b8821b1ccf7108d2a25e03/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f506f737467726553514c2d3431363945313f7374796c653d666c6174266c6f676f3d706f737467726573716c266c6f676f436f6c6f723d7768697465" alt="PostgreSQL" /></a>
+<a href="https://www.typescriptlang.org/"><img src="https://camo.githubusercontent.com/88bfa9b403be10c356cf83cf1442ec12359f294d36cb6826f1254ac126a718f3/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f547970655363726970742d3331373843363f7374796c653d666c6174266c6f676f3d74797065736372697074266c6f676f436f6c6f723d7768697465" alt="TypeScript" /></a>
+</p>
 <br />
 
 📖 Acerca de Bóveda Capital
