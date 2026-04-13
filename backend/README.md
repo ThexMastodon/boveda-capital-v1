@@ -1,59 +1,161 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<div align="center">
+<a href="https://laravel.com" target="_blank">
+<img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" alt="Laravel Logo" width="200">
+</a>
+
+<h3 align="center">⚙️ Bóveda Capital - Backend API</h3>
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+Núcleo del sistema encargado de la lógica financiera, seguridad mediante roles y persistencia de datos.
+<br />
+Construido con Laravel 11 y arquitectura orientada a servicios (SOLID).
+<br />
+<br />
+<a href="#instalación-y-configuración"><strong>Empezar »</strong></a>
+·
+<a href="#arquitectura-de-carpetas">Ver Arquitectura</a>
 </p>
+</div>
 
-## About Laravel
+<!-- PROJECT SHIELDS (TÉCNICA INFALIBLE HTML) -->
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<p align="center">
+<a href="https://laravel.com"><img src="https://camo.githubusercontent.com/ef1a47276589247efdac6efd0565c453aca43ffe33e335c5b197952fb565f33e/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4c61726176656c2d4646324432303f7374796c653d666c6174266c6f676f3d6c61726176656c266c6f676f436f6c6f723d7768697465" alt="Laravel" /></a>
+<a href="https://www.postgresql.org/"><img src="https://camo.githubusercontent.com/5794ccb4a02205d87eff2d4743c7e63b63f5b6ba67b8821b1ccf7108d2a25e03/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f506f737467726553514c2d3431363945313f7374796c653d666c6174266c6f676f3d706f737467726573716c266c6f676f436f6c6f723d7768697465" alt="PostgreSQL" /></a>
+<a href="https://www.php.net/"><img src="https://camo.githubusercontent.com/bbeaca4ecdd74d3fde840f711ebb8a5def2ff801187623f9bc365761b3b66f86/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f7068702d2532333737374242342e7376673f7374796c653d666f722d7468652d6261646765266c6f676f3d706870266c6f676f436f6c6f723d7768697465" alt="PHP" /></a>
+</p>
+<br />
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+📖 Acerca del Backend
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+El backend de Bóveda Capital es una API RESTful robusta que actúa como el motor principal del sistema de préstamos. Se encarga de procesar cálculos financieros complejos, gestionar la autenticación de usuarios y asegurar que todas las transacciones cumplan con las reglas de negocio establecidas.
 
-## Learning Laravel
+Arquitectura Limpia: Implementación de Service Pattern para desacoplar la lógica de negocio de los controladores.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+Seguridad: Autenticación basada en tokens con Laravel Sanctum y control de acceso granular con Spatie Permissions.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Integridad de Datos: Uso de migraciones, transacciones de base de datos y claves foráneas estrictas en PostgreSQL.
 
-## Laravel Sponsors
+🛠️ Instalación y Configuración
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Sigue estos pasos para levantar el servidor de la API en tu entorno local.
 
-### Premium Partners
+Requisitos Previos
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+PHP: versión <code>>= 8.2</code> con las extensiones <code>pdo_pgsql</code> y <code>mbstring</code> habilitadas.
 
-## Contributing
+Composer: Gestor de dependencias de PHP.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+PostgreSQL: Base de datos instalada y en ejecución.
+<div style="margin-top:100px;"/>
+<br>
+<br>
+<br> 
+<b>💻 Instalación</b>
+    
+Navega al directorio del backend
+```sh
+cd backend
+```
 
-## Code of Conduct
+Instala las dependencias de PHP mediante Composer
+```sh
+composer install
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Crea tu archivo de entorno a partir del ejemplo proporcionado
+```sh
+cp .env.example .env
+```
 
-## Security Vulnerabilities
+Genera la clave de encriptación de la aplicación
+```sh
+php artisan key:generate
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Configura tu conexión a la base de datos en el archivo <code>.env</code>. Asegúrate de que los valores coincidan con tu servidor PostgreSQL:
+```text
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=boveda_capital_db
+DB_USERNAME=tu_usuario
+DB_PASSWORD=tu_contraseña
+```
 
-## License
+Ejecuta las migraciones (y opcionalmente los seeders para datos de prueba)
+```sh
+php artisan migrate --seed
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Inicia el servidor de desarrollo local
+```sh
+php artisan serve
+```
+<br>
+<br>
+<br>
+💡 La API estará disponible en <code>http://localhost:8000</code>.
+<br>
+<br>
+<br>
+📂 Arquitectura de Carpetas
+
+La estructura interna se ha adaptado para separar claramente las responsabilidades, siguiendo principios SOLID:
+
+```text
+backend/
+├── app/
+│   ├── Contracts/        # Interfaces (Contratos) para los servicios.
+│   ├── Services/         # Lógica de negocio (Cálculos de intereses, amortizaciones).
+│   ├── Http/
+│   │   ├── Controllers/  # Controladores ligeros (solo delegan a los Services).
+│   │   └── Requests/     # Form Requests para validación de entrada.
+│   └── Models/           # Modelos de Eloquent con relaciones financieras.
+├── database/
+│   ├── migrations/       # Estructura y evolución de la base de datos.
+│   └── seeders/          # Datos semilla (roles iniciales, admin por defecto).
+├── routes/
+│   └── api.php           # Único punto de entrada para el frontend Next.js.
+└── tests/                # Pruebas unitarias y de integración (PHPUnit).
+```
+
+<br>
+<br>
+<br>
+🛡️ Seguridad y Permisos
+
+Utilizamos Spatie Laravel Permission para gestionar el acceso basado en roles (RBAC). El sistema contempla por defecto:
+
+Administrador: Acceso total al sistema, gestión de usuarios, aprobación/rechazo de préstamos y configuración de tasas.
+
+Asesor: Gestión de solicitudes de préstamos de clientes asignados y seguimiento de pagos.
+
+Cliente: Acceso restringido únicamente a la consulta del estado de sus propios créditos e historial de pagos.
+
+<br>
+<br>
+<br>
+🧪 Comandos Útiles
+
+Tabla de referencia rápida para el desarrollo diario:
+| Comando | Descripción |
+|--------|------------|
+| php artisan migrate | Aplica nuevas migraciones a la base de datos. |
+| php artisan migrate:fresh --seed | Borra todas las tablas, migra de cero y carga los datos de prueba. |
+| php artisan make:service LoanService | (Custom) Genera una nueva clase de servicio en app/Services. |
+| php artisan route:list | Muestra la lista completa de endpoints registrados en la API. |
+| php artisan optimize:clear | Limpia la caché de configuración, rutas y vistas. |
+
+<br>
+<br>
+🤝 Top Contributors
+
+<div align="left">
+<a href="https://github.com/ThexMastodon">
+<img src="https://avatars.githubusercontent.com/u/143536035?s=400&u=5891b1a7a550ac0904751bc94e2132730546c992&v=4" width="80" height="80" style="border-radius: 50%; margin-bottom: 10px;" alt="ThexMastodon Perfil" />
+<br />
+</a>
+</div>
+
+<p align="center">Desarrollado por <strong>Valle Silicon</strong> 💻 para <b>Bóveda Capital</b></p>
