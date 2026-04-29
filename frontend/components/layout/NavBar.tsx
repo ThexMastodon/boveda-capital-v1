@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Bell, ChevronRight, User, Settings, LogOut } from "lucide-react";
+import { Bell, ChevronRight, Menu, User, Settings, LogOut } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { authService } from "@/services/authServices";
@@ -12,25 +12,31 @@ const Breadcrumb = ({ path }: { path: string }) => {
   const segments = path.split("/").filter(Boolean);
 
   return (
-    <nav className="flex items-center gap-2 font-sans text-[10px] font-bold tracking-[0.2em] text-slate-500 uppercase">
-      {segments.map((segment, index) => (
-        <React.Fragment key={`${segment}-${index}`}>
-          <ChevronRight size={10} className="text-slate-800" />
-          <span
-            className={cn(
-              "transition-colors",
-              index === segments.length - 1 ? "text-blue-500" : "text-slate-400"
+    <nav className="flex min-w-0 items-center gap-1 font-sans text-[10px] font-bold tracking-[0.2em] text-slate-500 uppercase">
+      {segments.map((segment, index) => {
+        const isLast = index === segments.length - 1;
+        return (
+          <React.Fragment key={`${segment}-${index}`}>
+            {/* En móvil solo mostramos el último segmento */}
+            {!isLast ? (
+              <span className="hidden items-center gap-1 sm:flex">
+                <ChevronRight size={10} className="shrink-0 text-slate-700" />
+                <span className="text-slate-400">{segment.replace(/-/g, " ")}</span>
+              </span>
+            ) : (
+              <span className="flex min-w-0 items-center gap-1">
+                <ChevronRight size={10} className="shrink-0 text-slate-700" />
+                <span className="truncate text-blue-500">{segment.replace(/-/g, " ")}</span>
+              </span>
             )}
-          >
-            {segment.replace(/-/g, " ")}
-          </span>
-        </React.Fragment>
-      ))}
+          </React.Fragment>
+        );
+      })}
     </nav>
   );
 };
 
-export default function NavBar() {
+export default function NavBar({ onMenuOpen }: { onMenuOpen: () => void }) {
   const pathname = usePathname();
   const router = useRouter();
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -91,8 +97,15 @@ export default function NavBar() {
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-slate-700/40 bg-[#0d1524]/72 backdrop-blur-xl">
-      <div className="flex h-14 items-center justify-between px-4 lg:px-6">
-        <div className="flex items-center gap-6">
+      <div className="flex h-14 min-w-0 items-center justify-between px-3 lg:px-6">
+        <div className="flex min-w-0 flex-1 items-center gap-3">
+          <button
+            onClick={onMenuOpen}
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-slate-700/50 bg-slate-800/50 text-slate-300 transition-all hover:border-slate-600 hover:text-white lg:hidden"
+            aria-label="Abrir barra lateral"
+          >
+            <Menu size={18} />
+          </button>
           <Breadcrumb path={pathname || "/dashboard"} />
         </div>
 

@@ -7,12 +7,15 @@ import SideBar from "@/components/layout/SideBar";
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-[#0b1220]">
       <SideBar
         isCollapsed={isSidebarCollapsed}
         onCollapsedChange={setIsSidebarCollapsed}
+        isMobileOpen={isMobileOpen}
+        onMobileOpenChange={setIsMobileOpen}
       />
 
       <div
@@ -20,7 +23,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
           isSidebarCollapsed ? "lg:pl-20" : "lg:pl-72"
         }`}
       >
-        <NavBar />
+        <NavBar onMenuOpen={() => setIsMobileOpen(true)} />
         {children}
       </div>
     </div>

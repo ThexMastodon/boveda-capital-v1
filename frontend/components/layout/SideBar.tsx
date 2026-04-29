@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import * as LucideIcons from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { ChevronDown, LogOut, ShieldCheck, User, Menu, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
+import { ChevronDown, LogOut, ShieldCheck, User, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { useSidebar } from "@/hooks/HookSideBar";
@@ -14,6 +14,8 @@ import { NavModule } from "@/types/Sidebar";
 interface SideBarProps {
   isCollapsed: boolean;
   onCollapsedChange: (value: boolean) => void;
+  isMobileOpen: boolean;
+  onMobileOpenChange: (value: boolean) => void;
 }
 
 const DynamicIcon = ({ name, className }: { name: string; className?: string}) => {
@@ -22,14 +24,29 @@ const DynamicIcon = ({ name, className }: { name: string; className?: string}) =
   return <IconComponent className={className} />;
 };
 
-export default function SideBar({ isCollapsed, onCollapsedChange }: SideBarProps) {
+export default function SideBar({ isCollapsed, onCollapsedChange, isMobileOpen, onMobileOpenChange }: SideBarProps) {
   const { modules, isLoading, error } = useSidebar();
-  const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [openMenuId, setOpenMenuId] = useState<number | null>(null);
   const [authUser, setAuthUser] = useState<{ name?: string; username?: string } | null>(null);
 
   const pathname = usePathname();
   const router = useRouter();
+
+  const normalizeSegment = (value: string) => value.replace(/^\/+|\/+$/g, "");
+
+  const resolveModulePath = (moduleSlug: string) => {
+    if (moduleSlug === "/dashboard" || moduleSlug === "dashboard") return "/dashboard";
+    if (moduleSlug.startsWith("/dashboard")) return moduleSlug;
+    if (moduleSlug.startsWith("/")) return `/dashboard${moduleSlug}`;
+    return `/dashboard/${normalizeSegment(moduleSlug)}`;
+  };
+
+  const resolveSubmodulePath = (moduleSlug: string, subSlug: string) => {
+    if (subSlug.startsWith("/dashboard")) return subSlug;
+    if (subSlug.startsWith("/")) return `/dashboard${subSlug}`;
+
+    return `${resolveModulePath(moduleSlug)}/${normalizeSegment(subSlug)}`;
+  };
 
   useEffect(() => {
     const rawUser = window.localStorage.getItem("auth_user");
@@ -56,7 +73,7 @@ export default function SideBar({ isCollapsed, onCollapsedChange }: SideBarProps
 
   const handleNavigate = (slug: string) => {
     if (isMobileOpen) {
-      setIsMobileOpen(false);
+      onMobileOpenChange(false);
     }
     router.push(slug);
   };
@@ -81,23 +98,13 @@ export default function SideBar({ isCollapsed, onCollapsedChange }: SideBarProps
 
   return (
     <>
-      {!isMobileOpen && (
-        <button
-          onClick={() => setIsMobileOpen(true)}
-          className="fixed top-4 left-4 z-60 rounded-xl border border-slate-800 bg-slate-950 p-2.5 text-white shadow-2xl transition-transform active:scale-95 lg:hidden"
-          aria-label="Abrir barra lateral"
-        >
-          <Menu size={22} />
-        </button>
-      )}
-
       <AnimatePresence>
         {isMobileOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setIsMobileOpen(false)}
+            onClick={() => onMobileOpenChange(false)}
             className="fixed inset-0 z-70 bg-black/70 backdrop-blur-md lg:hidden"
           />
         )}
@@ -138,7 +145,7 @@ export default function SideBar({ isCollapsed, onCollapsedChange }: SideBarProps
           {isLoading ? (
             <div className="flex h-40 flex-col items-center justify-center gap-3 opacity-50">
               <Loader2 className="animate-spin text-blue-500" size={24} />
-              {!isCollapsed && <span className="text-[10px] font-bold tracking-[0.2em] uppercase">Sincronizando Core...</span>}
+              {!isCollapsed && <span className="text-[10px] font-bold tracking-[0.2em] uppercase">Cargando...</span>}
             </div>
           ) : error ? (
             <div className="mx-2 rounded-xl border border-red-500/20 bg-red-500/10 p-3 text-center">
@@ -153,7 +160,7 @@ export default function SideBar({ isCollapsed, onCollapsedChange }: SideBarProps
               {modules.map((module: NavModule) => {
                 const hasSubs = Boolean(module.submodules?.length);
                 const isOpen = openMenuId === module.id;
-                const modulePath = `/dashboard/${module.slug}`;
+                const modulePath = resolveModulePath(module.slug);
                 const isActive = pathname === modulePath || pathname?.startsWith(`${modulePath}/`);
 
                 return (
@@ -195,7 +202,7 @@ export default function SideBar({ isCollapsed, onCollapsedChange }: SideBarProps
                           className="space-y-1 overflow-hidden pl-10"
                         >
                           {module.submodules?.map((sub) => {
-                            const subPath = `/dashboard/${module.slug}/${sub.slug}`;
+                            const subPath = resolveSubmodulePath(module.slug, sub.slug);
                             return (
                               <button
                                 key={sub.id}
